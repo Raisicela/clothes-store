@@ -1,0 +1,23 @@
+import { Module } from '@nestjs/common';
+import { ProductsService } from './products.service';
+import { ProductsController } from './products.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Product, ProductSchema } from './entities/product.entity';
+import { NestjsFormDataModule } from 'nestjs-form-data';
+import { AuthModule } from 'src/auth/auth.module';
+
+@Module({
+  controllers: [ProductsController],
+  providers: [ProductsService],
+  imports: [
+    NestjsFormDataModule,
+    MongooseModule.forFeature([
+      {
+        name: Product.name,
+        schema: ProductSchema,
+      },
+    ]),
+    AuthModule,
+  ],
+})
+export class ProductsModule {}

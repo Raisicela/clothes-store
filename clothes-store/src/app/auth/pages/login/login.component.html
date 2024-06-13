@@ -1,0 +1,55 @@
+<div class="flex flex-row justify-content-center">
+  <mat-card
+    class="flex align-items-center xs:w-12 sm:w-8 md:w-6 lg:w-4 bg-white border-round-lg mt-4 pt-6 pb-4 shadow-8"
+  >
+    <mat-card-header class="mb-4">
+      <mat-card-title>Iniciar Sesión</mat-card-title>
+    </mat-card-header>
+    <form
+      [formGroup]="myForm"
+      (ngSubmit)="onSave()"
+      class="flex flex-column justify-content-center align-items-center w-11"
+    >
+      <mat-form-field class="w-12">
+        <mat-label>Correo:</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field class="w-12">
+        <mat-label>Contraseña:</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+        />
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button
+        class="w-10 px-4"
+        mat-button
+        mat-flat-button
+        style="background-color: rgba(255, 107, 1, 1)"
+        type="submit"
+        [disabled]="myForm.invalid"
+      >
+        Ingresar
+      </button>
+
+      <a
+        class="text-orange-500 align-items-center my-2"
+        [routerLink]="['auth//register']"
+      >
+        ¿No tienes cuenta?
+      </a>
+    </form>
+  </mat-card>
+</div>
