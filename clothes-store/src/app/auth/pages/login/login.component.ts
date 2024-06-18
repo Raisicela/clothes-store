@@ -1,39 +1,52 @@
-import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { RouterModule, Router } from '@angular/router';
 import {
+  ReactiveFormsModule,
   FormBuilder,
   FormGroup,
-  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+
+import { Component, computed, effect } from '@angular/core';
+
+import { AuthService } from '../../services/auth.service';
+
+import Swal from 'sweetalert2';
+import { AuthStatus } from '../../interfaces';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'auth-login',
   standalone: true,
   imports: [
+    MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatCardModule,
-    MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
   styles: ` `,
 })
 export class LoginComponent {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   public hide = true;
 
   public myForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    email: ['admin@store.com', [Validators.required, Validators.email]],
+    password: ['admin123', [Validators.required, Validators.minLength(6)]],
   });
 
   clickEvent(event: MouseEvent) {
@@ -41,7 +54,13 @@ export class LoginComponent {
     event.stopPropagation();
   }
 
-  onSave() {
-    console.log(this.myForm.value);
+  login() {
+    const { email, password } = this.myForm.value;
+    this.authService.login(email, password).subscribe({
+      next: () => this.router.navigateByUrl('/dashboard/categories'),
+      error: (message) => {
+        Swal.fire('Error', message, 'error');
+      },
+    });
   }
 }

@@ -3,20 +3,21 @@
     class="flex align-items-center xs:w-12 sm:w-8 md:w-6 lg:w-4 bg-white border-round-lg mt-4 pt-6 pb-4 shadow-8"
   >
     <mat-card-header class="mb-4">
-      <mat-card-title>Iniciar Sesión</mat-card-title>
+      <mat-card-title>LOG IN</mat-card-title>
     </mat-card-header>
     <form
       [formGroup]="myForm"
-      (ngSubmit)="onSave()"
+      (ngSubmit)="login()"
       class="flex flex-column justify-content-center align-items-center w-11"
+      autocomplete="off"
     >
       <mat-form-field class="w-12">
-        <mat-label>Correo:</mat-label>
-        <input matInput formControlName="email" />
+        <mat-label>Email:</mat-label>
+        <input matInput type="email" formControlName="email" />
       </mat-form-field>
 
       <mat-form-field class="w-12">
-        <mat-label>Contraseña:</mat-label>
+        <mat-label>Password:</mat-label>
         <input
           matInput
           [type]="hide ? 'password' : 'text'"
@@ -41,15 +42,16 @@
         type="submit"
         [disabled]="myForm.invalid"
       >
-        Ingresar
+        Log in
       </button>
-
-      <a
-        class="text-orange-500 align-items-center my-2"
-        [routerLink]="['auth//register']"
-      >
-        ¿No tienes cuenta?
-      </a>
+      <br />
+      <span>Do you not have an account?</span>
+      <span>
+        Create it
+        <a class="align-items-center my-2" [routerLink]="['/auth/register']">
+          here</a
+        >!
+      </span>
     </form>
   </mat-card>
 </div>

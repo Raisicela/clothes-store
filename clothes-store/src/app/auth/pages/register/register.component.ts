@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,11 +10,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { AuthStatus } from '../../interfaces';
+import Swal from 'sweetalert2';
+import { ValidatorsService } from '../../services/validators.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'auth-register',
   standalone: true,
   imports: [
+    CommonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -26,12 +33,24 @@ import {
   styles: '',
 })
 export class RegisterComponent {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private validatorsService: ValidatorsService,
+    private router: Router
+  ) {}
   public hide = true;
 
   public myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.email,
+        this.validatorsService.cantBeAdmin,
+      ],
+    ],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
@@ -40,7 +59,13 @@ export class RegisterComponent {
     event.stopPropagation();
   }
 
-  onSave() {
-    console.log(this.myForm.value);
+  logUp() {
+    const { email, name, password } = this.myForm.value;
+    this.authService.logup(email, name, password).subscribe({
+      next: () => this.router.navigateByUrl('/dashboard/categories'),
+      error: (message) => {
+        Swal.fire('Error', message, 'error');
+      },
+    });
   }
 }
