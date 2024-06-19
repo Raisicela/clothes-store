@@ -34,7 +34,7 @@ export class AppComponent {
         if (this.authService.authRol() === 'admin') {
           this.router.navigateByUrl('/dashboard/categories');
         } else {
-          this.router.navigateByUrl('/store/categories');
+          this.router.navigateByUrl('/store/home');
         }
         break;
 

@@ -1,23 +1,56 @@
-<div class="flex flex-row justify-content-between">
-  <div class="justify-content-start font-bold ml-5">
-    <h1>THUMBS UP</h1>
-  </div>
-  <div class="justify-content-between px-4">
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>THUMBS UP</span>
+    <span class="spacer"></span>
+    @if(isSmallScreen){
+
     <button
-      class="text-700 font-normal"
-      mat-button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Menu"
+      class="mr-4"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        *ngFor="let item of reactiveMenu"
+        [routerLink]="[item.route]"
+      >
+        {{ item.title }}
+      </button>
+    </mat-menu>
+
+    }@else {
+    <a
+      class="font-light"
       *ngFor="let item of reactiveMenu"
       [routerLink]="[item.route]"
       routerLinkActive="active-link"
     >
       {{ item.title }}
-    </button>
+    </a>
 
-    <icon class="align-content-center" [matMenuTriggerFor]="beforeMenu">
-      <mat-icon>account_circle</mat-icon>
-    </icon>
+    <a
+      class="text-700 font-normal"
+      routerLink="/store/cart"
+      routerLinkActive="active-cart"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </a>
+
+    <a
+      class="text-700 font-normal"
+      routerLinkActive="active-user"
+      [matMenuTriggerFor]="beforeMenu"
+    >
+      Hi, {{ user }}
+    </a>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="onLogOut()">Log Out</button>
     </mat-menu>
-  </div>
-</div>
+
+    }
+  </mat-toolbar-row>
+</mat-toolbar>

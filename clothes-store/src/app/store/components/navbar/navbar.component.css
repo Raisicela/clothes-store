@@ -1,16 +1,26 @@
-div {
+mat-toolbar {
   background-color: rgba(255, 107, 1, 1);
   height: 80px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Montserrat'
 }
 
-h1 {
+mat-icon {
+  color: black;
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+}
+
+span {
   color: white;
   margin-bottom: 0px;
-  font-size: 36px
+  font-size: 36px;
+  font-weight: bold;
+
 }
 
 .active-link {
@@ -19,12 +29,52 @@ h1 {
   text-underline-offset: 0.5em;
   text-decoration-thickness: 3px;
   font-size: 18px;
+  color: white;
+  font-weight: bolder;
+
 }
 
-mat-icon {
-  color: black;
-  font-size: 40px;
-  height: 40px;
-  width: 40px;
+.active-cart mat-icon {
+  color: white;
+
 }
+
+.active-user {
+  color: white;
+}
+
+a{
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  margin: 15px;
+  color: black;
+  font-weight: lighter;
+}
+
+mat-toolbar-row {
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+
+}
+
+@media (max-width: 600px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+
+
+
+
 

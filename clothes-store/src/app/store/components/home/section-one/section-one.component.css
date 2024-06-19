@@ -1,0 +1,19 @@
+.bg {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url('/assets/home/bg1-home.png') ;
+  background-size:cover;
+  margin: 0;
+  font-family: 'Montserrat'
+}
+
+h5{
+  font-family: 'Montserrat';
+}
+
+mat-form-field{
+  font-family: 'Montserrat';
+}
