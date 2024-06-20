@@ -1,4 +1,4 @@
-<div class="col flex flex-column justify-content-center px-6 pt-8">
+<div class="col flex flex-column justify-content-center px-6 pt-6">
   <h5 class="title">Newly added</h5>
 </div>
 <div class="flex flex-row">
@@ -7,4 +7,9 @@
   <div class="triangle-down"></div>
 </div>
 
-<store-card class="container"></store-card>
+<div class="container gap-2 mt-6 px-4">
+  <product-card
+    *ngFor="let product of products"
+    [cloth]="product"
+  ></product-card>
+</div>

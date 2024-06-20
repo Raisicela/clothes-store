@@ -1,16 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Product } from '../../interfaces/product.interface';
+import { CommonModule } from '@angular/common';
+import { ProductPageComponent } from '../../pages/product-page/product-page.component';
+import { RatingComponent } from '../rating/rating.component';
+import { LazyImageComponent } from '../lazyImage/lazyImage.component';
 
 @Component({
-  selector: 'store-card',
+  selector: 'product-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+    ProductPageComponent,
+    RatingComponent,
+    LazyImageComponent,
+  ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  public rating = 3;
-  public starsArray = [1, 2, 3, 4, 5];
+  @Input()
+  public cloth!: Product;
 }

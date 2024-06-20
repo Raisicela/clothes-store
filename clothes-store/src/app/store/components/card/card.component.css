@@ -1,3 +1,5 @@
+
+
 mat-card{
   background-color:rgba(255, 154, 61, 1);;
 }
@@ -5,29 +7,24 @@ mat-card{
 .price{
   color: white;
   font-family: 'Montserrat';
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .title{
   font-family: 'Montserrat';
-  font-size: 24px;
+  font-size: 14px;
   font-weight: bolder;
+  text-align: center;
 }
 
 .description{
-  margin-top: 40px;
-  font-family: 'Montserrat';
-  font-size: 18px;
-}
-
-.star-rating .mat-icon {
   margin-top: 1rem;
-  color: gold;
+  font-family: 'Montserrat';
+  font-size: 12px;
 }
 
 button{
   background-color: white;
   border-color: black;
-  }
-
+}
 

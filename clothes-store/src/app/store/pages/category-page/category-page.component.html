@@ -1,1 +1,19 @@
-
+<div class="grid mx-4 mt-2 my-4">
+  <mat-card
+    class="col p-3 mx-4"
+    *ngFor="let category of categories"
+    [ngStyle]="{
+      'background-image':
+        'linear-gradient(90deg, rgba(255, 107, 1, 1), rgba(255, 245, 235, 0)), url(' +
+        category.image +
+        ')',
+      'background-size': 'cover',
+      'margin-top': '1rem',
+      'margin-bottom': '1rem',
+    }"
+  >
+    <mat-card-content>
+      <p class="title">{{ category.name }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,2 +1,10 @@
-
+.title {
+  font-family: 'Montserrat';
+  font-size: 24px;
+  font-weight: bolder;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  color: white;
+  text-align: start;
+}
 

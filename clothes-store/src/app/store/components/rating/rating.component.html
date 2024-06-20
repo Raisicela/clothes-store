@@ -1,0 +1,11 @@
+<div
+  class="star-rating flex flex-row justify-content-center align-items-center mt-3"
+>
+  <mat-icon
+    class="flex align-items-center"
+    *ngFor="let star of starsArray"
+    [class.filled]="star <= rating"
+    >star
+  </mat-icon>
+  <span>{{ rating | number : "1.1-1" }}</span>
+</div>

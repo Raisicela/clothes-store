@@ -1,20 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchBoxComponent } from '../../search-box/search-box.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'store-home-section-one',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    CommonModule,
-  ],
+  imports: [ReactiveFormsModule, CommonModule, SearchBoxComponent],
   templateUrl: './section-one.component.html',
   styleUrl: './section-one.component.css',
 })

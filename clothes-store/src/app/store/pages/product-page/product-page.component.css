@@ -1,9 +1,27 @@
 .container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: start;
   margin: 0;
   font-family: 'Montserrat'
+}
+
+.title{
+  margin-left: 1rem;
+  margin-bottom: 0;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight:600;
+  color: rgba(255, 108, 0, 1);
+}
+
+.item{
+  text-decoration: none;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  color: black;
+}
+
+mat-list-option{
+  margin: 0;
 }
