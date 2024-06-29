@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Category } from './entities/category.entity';
+import { MemoryStoredFile } from 'nestjs-form-data';
 import { Model } from 'mongoose';
+import * as fs from 'fs';
+
+import { Category } from './entities/category.entity';
+import { CreateCategoryDto } from './dto/create-category.dto';
 import { Product } from 'src/products/entities/product.entity';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -17,7 +20,8 @@ export class CategoryService {
   ) {}
 
   create(createCategoryDto: CreateCategoryDto) {
-    return this.categoryModel.create(createCategoryDto);
+    const image = this.saveImageAndGetUrl(createCategoryDto.imageFile);
+    return this.categoryModel.create({ ...createCategoryDto, image });
   }
 
   findAll() {
@@ -29,6 +33,13 @@ export class CategoryService {
   }
 
   update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    if (updateCategoryDto.imageFile) {
+      const image = this.saveImageAndGetUrl(updateCategoryDto.imageFile);
+      return this.categoryModel.updateOne(
+        { _id: id },
+        { ...updateCategoryDto, image },
+      );
+    }
     return this.categoryModel.updateOne({ _id: id }, updateCategoryDto);
   }
 
@@ -38,5 +49,12 @@ export class CategoryService {
 
   findProductsByCategoryId(id: string) {
     return this.productModel.find({ categoryId: id });
+  }
+
+  private saveImageAndGetUrl(file: MemoryStoredFile) {
+    const fileName = `${Date.now()}.${file.originalName.split('.')[1]}`;
+    const path = `./public/images/${fileName}`;
+    fs.writeFileSync(path, file.buffer);
+    return `http://localhost:3000/images/${fileName}`;
   }
 }

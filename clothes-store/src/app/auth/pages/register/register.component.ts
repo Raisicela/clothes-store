@@ -16,6 +16,7 @@ import { AuthStatus } from '../../interfaces';
 import Swal from 'sweetalert2';
 import { ValidatorsService } from '../../services/validators.service';
 import { CommonModule } from '@angular/common';
+import { AuthRoles } from '../../interfaces/auth-roles.enum';
 
 @Component({
   selector: 'auth-register',
@@ -67,7 +68,7 @@ export class RegisterComponent {
   logUp() {
     const { email, name, password } = this.myForm.value;
     this.authService.logup(email, name, password).subscribe({
-      next: () => this.router.navigateByUrl('/dashboard/categories'),
+      next: () => this.router.navigateByUrl('/store/home'),
       error: (message) => {
         Swal.fire('Error', message, 'error');
       },

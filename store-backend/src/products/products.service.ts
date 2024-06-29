@@ -23,6 +23,14 @@ export class ProductsService {
     return this.productModel.find();
   }
 
+  findAllPage(page: number, limit: number) {
+    return this.productModel
+      .find()
+      .skip(page * limit)
+      .limit(limit)
+      .exec();
+  }
+
   findOne(id: string) {
     return this.productModel.findById(id);
   }
@@ -34,16 +42,15 @@ export class ProductsService {
         { _id: id },
         { ...updateProductDto, image },
       );
-    } else {
-      return this.productModel.updateOne({ _id: id }, updateProductDto);
     }
+    return this.productModel.updateOne({ _id: id }, updateProductDto);
   }
 
   remove(id: string) {
     return this.productModel.deleteOne({ _id: id });
   }
 
-  saveImageAndGetUrl(file: MemoryStoredFile) {
+  private saveImageAndGetUrl(file: MemoryStoredFile) {
     const fileName = `${Date.now()}.${file.originalName.split('.')[1]}`;
     const path = `./public/images/${fileName}`;
     fs.writeFileSync(path, file.buffer);

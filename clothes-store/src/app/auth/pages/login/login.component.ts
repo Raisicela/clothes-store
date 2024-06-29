@@ -17,6 +17,7 @@ import { AuthService } from '../../services/auth.service';
 
 import Swal from 'sweetalert2';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthRoles } from '../../interfaces/auth-roles.enum';
 
 @Component({
   selector: 'auth-login',
@@ -61,7 +62,12 @@ export class LoginComponent {
   login() {
     const { email, password } = this.myForm.value;
     this.authService.login(email, password).subscribe({
-      next: () => this.router.navigateByUrl('/dashboard/categories'),
+      next: () => {
+        if (this.authService.authRol() === AuthRoles.admin) {
+          this.router.navigateByUrl('/dashboard/categories');
+        }
+        this.router.navigateByUrl('/store/home');
+      },
       error: (message) => {
         Swal.fire('Error', message, 'error');
       },

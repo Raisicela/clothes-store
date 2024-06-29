@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -21,9 +22,9 @@ import {
   ApiConsumes,
   ApiOperation,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { PaginationDto } from './dto/pagination.dto';
 
 @ApiTags('products')
 @Controller('products')
@@ -42,10 +43,23 @@ export class ProductsController {
   }
 
   @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Get All product' })
   @ApiBearerAuth()
   @Get()
   findAll() {
     return this.productsService.findAll();
+  }
+
+  @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Get All product, pagination' })
+  @ApiBearerAuth()
+  // @ApiQuery({ type: PaginationDto })
+  @Get('pagination')
+  findAllPage(@Query() paginationDto: PaginationDto) {
+    return this.productsService.findAllPage(
+      +paginationDto.page,
+      +paginationDto.limit,
+    );
   }
 
   @UseGuards(AuthGuard)

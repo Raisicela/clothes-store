@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import {
-  IsEmail,
   IsString,
   MinLength,
   IsNumber,
@@ -9,7 +8,6 @@ import {
   Max,
   IsNotEmpty,
   IsNumberString,
-  IsDecimal,
 } from 'class-validator';
 import {
   HasMimeType,
@@ -17,7 +15,6 @@ import {
   MaxFileSize,
   MemoryStoredFile,
 } from 'nestjs-form-data';
-import { isDate } from 'util/types';
 
 export class CreateProductDto {
   @ApiProperty()
