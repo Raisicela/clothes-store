@@ -50,8 +50,8 @@ export class LoginComponent {
   public hide = true;
 
   public myForm: FormGroup = this.fb.group({
-    email: ['user@store.com', [Validators.required, Validators.email]],
-    password: ['user123', [Validators.required, Validators.minLength(6)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   clickEvent(event: MouseEvent) {
