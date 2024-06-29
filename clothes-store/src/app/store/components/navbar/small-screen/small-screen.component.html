@@ -1,0 +1,29 @@
+<div class="flex flex-row justify-content-around align-items-center">
+  <a
+    class="text-700 font-normal demo-section"
+    routerLink="/store/cart"
+    routerLinkActive="active-cart"
+  >
+    <mat-icon [matBadge]="countItems()" matBadgeSize="large"
+      >shopping_cart</mat-icon
+    >
+  </a>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Menu"
+    class="mr-2"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let item of reactiveMenu"
+      [routerLink]="[item.route]"
+    >
+      {{ item.title }}
+    </button>
+    <button mat-menu-item (click)="onLogOut()">Log Out</button>
+  </mat-menu>
+</div>

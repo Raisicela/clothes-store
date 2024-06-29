@@ -1,8 +1,11 @@
-<div class="grid mx-4 mt-2 my-4">
-  <mat-card
-    class="col p-3 mx-4"
-    *ngFor="let category of categories"
-    [ngStyle]="{
+<div class="flex flex-wrap">
+  <div
+    class="col-12 md:col-6 lg:col-4 xl:col-3 p-0"
+    *ngFor="let category of categories()"
+  >
+    <mat-card
+      class="mx-4"
+      [ngStyle]="{
       'background-image':
         'linear-gradient(90deg, rgba(255, 107, 1, 1), rgba(255, 245, 235, 0)), url(' +
         category.image +
@@ -11,9 +14,17 @@
       'margin-top': '1rem',
       'margin-bottom': '1rem',
     }"
-  >
-    <mat-card-content>
-      <p class="title">{{ category.name }}</p>
-    </mat-card-content>
-  </mat-card>
+    >
+      <mat-card-content>
+        <p
+          class="title"
+          routerLink="/store/products/"
+          routerLinkActive="active"
+          [queryParams]="{ id: category._id }"
+        >
+          {{ category.name | uppercase }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <a
+    class="font-normal"
+    *ngFor="let item of reactiveMenu"
+    [routerLink]="[item.route]"
+    routerLinkActive="active-link"
+  >
+    {{ item.title }}
+  </a>
+  <a
+    class="text-700 font-normal demo-section"
+    routerLink="/store/cart"
+    routerLinkActive="active-cart"
+  >
+    <mat-icon [matBadge]="countItems()" matBadgeSize="large"
+      >shopping_cart</mat-icon
+    >
+  </a>
+  <a
+    class="text-700 font-normal"
+    routerLinkActive="active-user"
+    [matMenuTriggerFor]="beforeMenu"
+  >
+    Hi, {{ user }}
+  </a>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="onLogOut()">Log Out</button>
+  </mat-menu>
+</div>

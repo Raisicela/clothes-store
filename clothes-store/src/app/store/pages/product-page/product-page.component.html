@@ -1,65 +1,81 @@
-<div class="flex">
-  <div class="w-3 ml-4 mt-4">
+<div class="flex w-12">
+  <div class="col-2 md:col-1 ml-3 mt-2">
     <h6 class="title">Categories</h6>
-    <mat-selection-list>
-      <mat-list-option>
-        <a class="item" routerLink="/store/products">All</a>
-      </mat-list-option>
-      <mat-list-option *ngFor="let category of categories">
-        <a
-          class="item"
-          routerLink="/store/products"
-          [queryParams]="{ category_id: category._id }"
-        >
-          {{ category.name }}</a
-        >
-      </mat-list-option>
-    </mat-selection-list>
+    <mat-list class="flex flex-column w-full pt-0 mt-0">
+      <button
+        class="button-item"
+        routerLink="/store/products"
+        routerLinkActive="button-all-selected"
+      >
+        All
+      </button>
+      <button
+        *ngFor="let category of categories()"
+        class="button-item"
+        routerLink="/store/products"
+        [queryParams]="{ id: category._id }"
+        routerLinkActive="button-item-selected"
+      >
+        {{ category.name }}
+      </button>
+    </mat-list>
     <h6 class="title">Precio</h6>
-    <mat-selection-list>
-      <mat-list-option>
-        <a class="item" routerLink="/store/products">All</a>
-      </mat-list-option>
-      <ng-container *ngFor="let priceRange of objectKeys(groupedProducts)">
-        <mat-list-option>
-          <a class="item" routerLink="/store/products">
-            {{ priceRange }}
-          </a>
-        </mat-list-option>
-        <mat-list-option *ngFor="let product of groupedProducts[priceRange]">
-          <a
-            class="item"
-            routerLink="/store/products"
-            [queryParams]="{ product_price: product.price }"
-          >
-            {{ product.price }}
-          </a>
-        </mat-list-option>
-      </ng-container>
-    </mat-selection-list>
+    <mat-list class="flex flex-column w-12 pt-0 mt-0">
+      <button
+        class="button-item"
+        [ngClass]="searchPrice() === '' ? 'button-item-selected' : ''"
+        (click)="updateSearchPrice('')"
+      >
+        All
+      </button>
+      <button
+        *ngFor="let priceRange of objectKeys(groupedProducts)"
+        class="button-item"
+        [ngClass]="searchPrice() === priceRange ? 'button-item-selected' : ''"
+        (click)="updateSearchPrice(priceRange)"
+      >
+        $ {{ priceRange }}
+      </button>
+    </mat-list>
     <h6 class="title">Rate</h6>
-    <mat-selection-list>
-      <mat-list-option>
-        <a class="item" routerLink="/store/products">All</a>
-      </mat-list-option>
-      <mat-list-option *ngFor="let rate of uniqueRates">
-        <a
-          class="item"
-          routerLink="/store/products"
-          [queryParams]="{ product_rate: rate }"
-        >
-          {{ rate }}
-        </a>
-      </mat-list-option>
-    </mat-selection-list>
+    <mat-list class="flex flex-column w-12 pt-0">
+      <button
+        class="button-item"
+        [ngClass]="searchRate() === '' ? 'button-item-selected' : ''"
+        (click)="updateSearchRate('')"
+      >
+        All
+      </button>
+      <button
+        *ngFor="let rateRange of objectKeys(groupedProductsRate)"
+        class="button-item"
+        [ngClass]="searchRate() === rateRange ? 'button-item-selected' : ''"
+        (click)="updateSearchRate(rateRange)"
+      >
+        {{ rateRange }}
+      </button>
+    </mat-list>
   </div>
-  <div class="mt-4">
-    <store-search-box></store-search-box>
-    <div class="container mx-6 mt-1 column-gap-4 row-gap-6">
+  <div class="mt-2 w-full">
+    <store-search-box
+      (queryChild)="updateSearchQuery($event)"
+    ></store-search-box>
+    <div
+      class="flex flex-wrap justify-content-start mx-4 productItems"
+      #scrollableDiv
+    >
       <product-card
-        *ngFor="let product of products"
+        class="col-12 md:col-4 lg:col-3 xl:col-2 p-0 flex justify-content-center"
+        (addToCart)="addToCart($event)"
+        *ngFor="let product of products()"
         [cloth]="product"
       ></product-card>
+    </div>
+    <div class="flex justify-content-center">
+      <button class="button-more" (click)="getProducts()">
+        More products...
+        <mat-icon> arrow_downward</mat-icon>
+      </button>
     </div>
   </div>
 </div>

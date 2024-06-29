@@ -1,1 +1,43 @@
-<p>product-page works!</p>
+<div class="flex flex-row justify-content-end">
+  <button
+    class="mt-4 mr-4 pr-2 button-item-add"
+    [routerLink]="['/dashboard/products/new-product']"
+  >
+    <mat-icon>add</mat-icon> Add New
+  </button>
+</div>
+<div class="flex flex-wrap justify-content-start mx-3">
+  <div
+    class="col-12 md:col-6 lg:col-3 xl:col-2 p-0 flex justify-content-center"
+    *ngFor="let product of products()"
+  >
+    <mat-card class="border-round-2xl my-4 w-11 pb-2">
+      <product-lazy-image
+        [url]="product.image"
+        [alt]="product.description"
+      ></product-lazy-image>
+      <mat-card-content>
+        <p class="title">{{ product.name | uppercase }}</p>
+        <p class="price">{{ product.currency }} {{ product.price }}</p>
+        <store-rating
+          [rating]="product.rate"
+          class="align-items-center"
+        ></store-rating>
+        <p class="description">{{ product.description }}</p>
+      </mat-card-content>
+      <mat-card-actions class="justify-content-center">
+        <div class="flex flex-row w-full justify-content-end">
+          <button
+            class="mt-2 mr-2 button-item"
+            [routerLink]="['/dashboard/products', product._id]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="deleteProduct(product._id)" class="mt-2 button-item">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

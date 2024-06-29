@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -9,8 +9,29 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './rating.component.html',
   styleUrl: './rating.component.css',
 })
-export class RatingComponent {
+export class RatingComponent implements OnChanges {
   @Input()
-  public rating!: number;
-  starsArray = [1, 2, 3, 4, 5];
+  public rating: number | undefined;
+  public fullStars: number[] = [];
+  public halfStar: boolean = false;
+  public emptyStars: number[] = [];
+
+  ngOnInit() {
+    this.calculateStars();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.calculateStars();
+  }
+
+  calculateStars() {
+    const totalStars = 5;
+    const fullStarsCount = Math.floor(this.rating!);
+    this.halfStar = this.rating! % 1 >= 0.5;
+    const emptyStarsCount =
+      totalStars - fullStarsCount - (this.halfStar ? 1 : 0);
+
+    this.fullStars = Array(fullStarsCount).fill(0);
+    this.emptyStars = Array(emptyStarsCount).fill(0);
+  }
 }

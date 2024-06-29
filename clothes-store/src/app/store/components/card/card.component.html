@@ -1,18 +1,27 @@
-<mat-card class="border-round-2xl my-2 w-12rem h-35rem">
+<mat-card class="border-round-2xl my-4 w-11 pb-2 h-27rem">
   <product-lazy-image
     [url]="cloth.image"
     [alt]="cloth.description"
+    [routerLink]="['/store/products', cloth._id]"
   ></product-lazy-image>
-  <mat-card-content>
-    <store-rating
-      [rating]="cloth.rate"
-      class="align-items-center"
-    ></store-rating>
-    <p class="title">{{ cloth.name }}</p>
-    <p class="price">{{ cloth.currency }} {{ cloth.price }}</p>
-    <p class="description">{{ cloth.description }}</p>
-  </mat-card-content>
-  <mat-card-actions class="justify-content-center">
-    <button mat-button class="text-700 my-1 w-9 text-xs">Add to Cart</button>
-  </mat-card-actions>
+  <div class="flex flex-column justify-content-between h-full">
+    <mat-card-content class="">
+      <p class="title">{{ cloth.name | uppercase }}</p>
+      <p class="price">{{ cloth.currency }} {{ cloth.price }}</p>
+      <store-rating
+        [rating]="cloth.rate"
+        class="align-items-center"
+      ></store-rating>
+      <p class="description">{{ cloth.description }}</p>
+    </mat-card-content>
+    <mat-card-actions class="justify-content-center">
+      <button
+        mat-button
+        class="text-700 my-1 w-9 text-xs"
+        (click)="addToCartHandler()"
+      >
+        Add to Cart
+      </button>
+    </mat-card-actions>
+  </div>
 </mat-card>

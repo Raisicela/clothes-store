@@ -1,0 +1,57 @@
+.container{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat'
+}
+
+.active-link {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.5em;
+  text-decoration-thickness: 3px;
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+
+}
+
+mat-icon {
+  align-items: end;
+  color: black;
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+}
+
+.active-cart mat-icon {
+  color: white;
+
+}
+
+.active-user {
+  color: white;
+}
+
+a {
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  margin: 15px;
+  color: black;
+}
+
+.demo-section+.demo-section {
+  margin-top: 16px;
+}
+
+.mat-menu {
+  font-family: 'Montserrat';
+}

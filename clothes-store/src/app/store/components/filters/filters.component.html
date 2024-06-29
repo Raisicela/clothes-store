@@ -1,0 +1,57 @@
+<h6 class="title">Categories</h6>
+<mat-list>
+  <mat-list-item>
+    <a class="item" routerLink="/store/products">All</a>
+  </mat-list-item>
+  <mat-list-item *ngFor="let category of categories()">
+    <a
+      class="item"
+      routerLink="/store/products"
+      [queryParams]="{ id: category._id }"
+      routerLinkActive="underline"
+    >
+      {{ category.name }}</a
+    >
+  </mat-list-item>
+</mat-list>
+<h6 class="title">Precio</h6>
+<mat-list>
+  <button
+    mat-button
+    class="button-item"
+    [ngClass]="searchPrice() === '' ? 'button-item-selected' : ''"
+    (click)="updateSearchPrice('')"
+  >
+    All
+  </button>
+  <ng-container *ngFor="let priceRange of objectKeys(groupedProducts)">
+    <button
+      mat-button
+      class="button-item"
+      [ngClass]="searchPrice() === priceRange ? 'button-item-selected' : ''"
+      (click)="updateSearchPrice(priceRange)"
+    >
+      {{ priceRange }}
+    </button>
+    <mat-list-item *ngFor="let product of groupedProducts[priceRange]">
+      <a class="item" routerLink="/store/products">
+        {{ product.price }}
+      </a>
+    </mat-list-item>
+  </ng-container>
+</mat-list>
+<h6 class="title">Rate</h6>
+<mat-list>
+  <mat-list-item>
+    <a class="item" routerLink="/store/products">All</a>
+  </mat-list-item>
+  <mat-list-item *ngFor="let rate of uniqueRates">
+    <a
+      class="item"
+      routerLink="/store/products"
+      [queryParams]="{ product_rate: rate }"
+    >
+      {{ rate }}
+    </a>
+  </mat-list-item>
+</mat-list>

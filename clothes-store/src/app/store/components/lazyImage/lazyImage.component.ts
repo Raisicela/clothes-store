@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'product-lazy-image',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, RouterModule],
   templateUrl: './lazyImage.component.html',
   styles: `
   picture {
@@ -23,7 +24,7 @@ img {
 }
 
 img:hover {
-  opacity: 0.25;
+  opacity: 0.5;
 }
   `,
 })

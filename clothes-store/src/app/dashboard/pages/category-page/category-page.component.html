@@ -1,1 +1,55 @@
-<p>category-page works!</p>
+<div class="flex flex-row justify-content-end">
+  <button
+    class="mt-4 mr-4 pr-2 button-item"
+    [routerLink]="['/dashboard/categories/new-category']"
+  >
+    <mat-icon>add</mat-icon>Add New
+  </button>
+</div>
+<div class="flex flex-wrap">
+  <div
+    class="col-12 md:col-6 lg:col-4 xl:col-3 p-0"
+    *ngFor="let category of categories()"
+  >
+    <mat-card
+      class="mx-4 h-14rem"
+      [ngStyle]="{
+        'background-image':
+          'linear-gradient(90deg, rgba(255, 107, 1, 1), rgba(255, 245, 235, 0)), url(' +
+          category.image +
+          ')',
+        'background-size': 'cover',
+        'margin-top': '1rem',
+        'margin-bottom': '0rem',
+        height: '10rem'
+      }"
+    >
+      <mat-card-content
+        class="flex flex-column justify-content-between h-full align-items-start"
+      >
+        <p
+          class="title"
+          routerLink="/store/products/"
+          routerLinkActive="active"
+          [queryParams]="{ id: category._id }"
+        >
+          {{ category.name | uppercase }}
+        </p>
+        <div class="flex flex-row w-full justify-content-end align-items-end">
+          <button
+            class="mt-2 mr-2 button-item"
+            [routerLink]="['/dashboard/categories', category._id]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            (click)="deleteCategory(category._id)"
+            class="mt-2 button-item"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

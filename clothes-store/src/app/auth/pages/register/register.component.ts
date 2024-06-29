@@ -30,7 +30,12 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
   ],
   templateUrl: './register.component.html',
-  styles: '',
+  styles: `
+  span, button, mat-label, input, mat-card-title{
+    font-family: 'Montserrat';
+    font-size: 14px
+  }
+  `,
 })
 export class RegisterComponent {
   constructor(

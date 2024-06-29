@@ -5,6 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
+import { SmallScreenComponent } from './small-screen/small-screen.component';
+import { LargeScreenComponent } from './large-screen/large-screen.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 interface MenuItem {
   title: string;
@@ -20,20 +24,21 @@ interface MenuItem {
     MatIconModule,
     CommonModule,
     RouterModule,
+    MatToolbarModule,
+    SmallScreenComponent,
+    LargeScreenComponent,
   ],
   templateUrl: './navbar-admin.component.html',
   styleUrl: './navbar-admin.component.css',
 })
 export class NavbarAdminComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  public isSmallScreen: boolean = true;
 
-  public reactiveMenu: MenuItem[] = [
-    { title: 'Categories', route: '/dashboard/categories' },
-    { title: 'Products', route: '/dashboard/products' },
-  ];
-
-  onLogOut() {
-    this.authService.logOut();
-    this.router.navigate(['auth/login']);
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.breakpointObserver
+      .observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
+      .subscribe((result) => {
+        this.isSmallScreen = result.matches;
+      });
   }
 }

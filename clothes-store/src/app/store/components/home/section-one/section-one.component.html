@@ -7,6 +7,6 @@
       {{ mensaje | uppercase }}
     </h5>
 
-    <store-search-box></store-search-box>
+    <store-search-box (queryChild)="search($event)"></store-search-box>
   </div>
 </div>

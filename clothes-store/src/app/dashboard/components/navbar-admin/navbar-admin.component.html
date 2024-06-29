@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>THUMBS UP</span>
+    <span class="spacer"></span>
+    @if(isSmallScreen){
+    <nav-small-screen></nav-small-screen>
+    }@else {
+    <nav-large-screen></nav-large-screen>
+    }
+  </mat-toolbar-row>
+</mat-toolbar>

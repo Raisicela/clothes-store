@@ -1,56 +1,11 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>THUMBS UP</span>
+    <span routerLink="/store/home" routerLinkActive="active">THUMBS UP</span>
     <span class="spacer"></span>
     @if(isSmallScreen){
-
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      aria-label="Menu"
-      class="mr-4"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button
-        mat-menu-item
-        *ngFor="let item of reactiveMenu"
-        [routerLink]="[item.route]"
-      >
-        {{ item.title }}
-      </button>
-    </mat-menu>
-
+    <nav-small-screen></nav-small-screen>
     }@else {
-    <a
-      class="font-light"
-      *ngFor="let item of reactiveMenu"
-      [routerLink]="[item.route]"
-      routerLinkActive="active-link"
-    >
-      {{ item.title }}
-    </a>
-
-    <a
-      class="text-700 font-normal"
-      routerLink="/store/cart"
-      routerLinkActive="active-cart"
-    >
-      <mat-icon>shopping_cart</mat-icon>
-    </a>
-
-    <a
-      class="text-700 font-normal"
-      routerLinkActive="active-user"
-      [matMenuTriggerFor]="beforeMenu"
-    >
-      Hi, {{ user }}
-    </a>
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="onLogOut()">Log Out</button>
-    </mat-menu>
-
+    <nav-large-screen></nav-large-screen>
     }
   </mat-toolbar-row>
 </mat-toolbar>

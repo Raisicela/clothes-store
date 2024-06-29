@@ -7,7 +7,6 @@ import { isUserGuard } from './auth/guards/is-user.guard';
 export const routes: Routes = [
   {
     path: 'auth',
-
     loadComponent: () =>
       import('./auth/layouts/auth-layout/auth-layout.component').then(
         (m) => m.AuthLayoutComponent
@@ -49,12 +48,27 @@ export const routes: Routes = [
             './dashboard/pages/category-page/category-page.component'
           ).then((m) => m.CategoryPageComponent),
       },
+
+      {
+        path: 'categories/:id',
+        loadComponent: () =>
+          import(
+            './dashboard/components/form-category/form-category.component'
+          ).then((m) => m.FormCategoryComponent),
+      },
       {
         path: 'products',
         loadComponent: () =>
           import('./dashboard/pages/product-page/product-page.component').then(
             (m) => m.ProductPageComponent
           ),
+      },
+      {
+        path: 'products/:id',
+        loadComponent: () =>
+          import(
+            './dashboard/components/form-product/form-product.component'
+          ).then((m) => m.FormProductComponent),
       },
       {
         path: '**',
@@ -89,6 +103,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./store/pages/product-page/product-page.component').then(
             (m) => m.ProductPageComponent
+          ),
+      },
+      {
+        path: 'products/:id',
+        loadComponent: () =>
+          import('./store/pages/product-detail/product-detail.component').then(
+            (m) => m.ProductDetailComponent
           ),
       },
       {

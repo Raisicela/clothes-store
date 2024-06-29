@@ -1,0 +1,146 @@
+<div class="flex flex-row justify-content-center w-full">
+  <mat-card
+    class="flex justify-content-around align-items-center w-11 md:w-10 bg-white border-round-lg mt-4 mx-4 pt-6 pb-4 shadow-8"
+  >
+    <form
+      [formGroup]="myForm"
+      (ngSubmit)="onSave()"
+      class="flex flex-column justify-content-center align-items-center w-11"
+    >
+      <mat-card-header class="mb-4">
+        @if (isNew) {
+        <mat-card-title class="font font-semibold text-lg">
+          CREATE PRODUCT</mat-card-title
+        >
+        } @else {
+        <mat-card-title class="font font-semibold text-lg">
+          EDIT PRODUCT</mat-card-title
+        >
+        }
+      </mat-card-header>
+
+      <div
+        class="flex flex-column md:flex-row w-full justify-content-aroundn gap-0 md:gap-4"
+      >
+        <!-- Category -->
+        <mat-form-field class="w-full">
+          <mat-label>Category:</mat-label>
+          <mat-select formControlName="categoryId">
+            @for (category of categories(); track category) {
+            <mat-option [value]="category._id">{{ category.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <!-- Name-->
+        <mat-form-field class="w-full">
+          <mat-label class="font">Name:</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+      </div>
+
+      <div
+        class="flex flex-column md:flex-row w-full justify-content-around gap-0 md:gap-4"
+      >
+        <div class="flex flex-column w-full mb-0 pb-0">
+          <!-- Price -->
+          <mat-form-field class="w-full">
+            <mat-label class="font">Price:</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="price"
+              placeholder="0"
+            />
+          </mat-form-field>
+          <span *ngIf="isValidField('price')" class="w-full">
+            Price must be 0 or greater
+          </span>
+        </div>
+
+        <!-- Currency -->
+        <mat-form-field class="w-full">
+          <mat-label class="font">Currency:</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="currency"
+            placeholder="USD"
+          />
+        </mat-form-field>
+      </div>
+
+      <!-- Stock -->
+      <mat-form-field class="w-full">
+        <mat-label class="font">Stock:</mat-label>
+        <input matInput type="number" formControlName="stock" placeholder="0" />
+      </mat-form-field>
+      <span *ngIf="isValidField('stock')" class="w-full">
+        Stock must be 0 or greater
+      </span>
+
+      <!-- Descripction -->
+      <mat-form-field class="w-full">
+        <mat-label class="font">Description:</mat-label>
+        <textarea matInput type="text" formControlName="description">
+        </textarea>
+      </mat-form-field>
+
+      <!-- Avatar -->
+
+      <mat-label class="font flex justify-content-start pl-5 font w-12"
+        >Image:*</mat-label
+      >
+      <picture>
+        <img
+          [src]="imageUrl"
+          width="150px"
+          height="150px"
+          class="border-round-lg mt-4"
+        />
+      </picture>
+      <input
+        type="file"
+        class="file-input"
+        (change)="updateImage($event)"
+        #fileUpload
+        formControlName="avatar"
+      />
+
+      <div
+        class="file-upload flex flex-column md:flex-row text-sm justify-content-start align-items-center font w-12 mb-4"
+      >
+        {{ myForm.value.avatar || "No file uploaded yet." }}
+
+        <button
+          mat-button
+          color="primary"
+          class="button-item flex justify-content-center align-items-center"
+          (click)="fileUpload.click()"
+        >
+          <mat-icon>attach_file</mat-icon> Choose an image
+        </button>
+      </div>
+
+      <div class="flex flex-row justify-content-evenly w-full">
+        <button
+          mat-button
+          mat-flat-button
+          class="btn btn-danger float-start font"
+          (click)="return()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-button
+          mat-flat-button
+          type="submit"
+          style="background-color: rgba(255, 107, 1, 1)"
+          class="font"
+          [disabled]="myForm.invalid"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ProductPageComponent } from '../../pages/product-page/product-page.component';
 import { RatingComponent } from '../rating/rating.component';
 import { LazyImageComponent } from '../lazyImage/lazyImage.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'product-card',
@@ -19,6 +20,7 @@ import { LazyImageComponent } from '../lazyImage/lazyImage.component';
     ProductPageComponent,
     RatingComponent,
     LazyImageComponent,
+    RouterModule,
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
@@ -26,4 +28,11 @@ import { LazyImageComponent } from '../lazyImage/lazyImage.component';
 export class CardComponent {
   @Input()
   public cloth!: Product;
+
+  @Output()
+  public addToCart = new EventEmitter();
+
+  addToCartHandler() {
+    this.addToCart.emit(this.cloth);
+  }
 }

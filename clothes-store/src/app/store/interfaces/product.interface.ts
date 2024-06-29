@@ -9,5 +9,6 @@ export interface Product {
   rate: number;
   categoryId: string;
   createdAt: string;
+  avatar?: string;
   __v: number;
 }

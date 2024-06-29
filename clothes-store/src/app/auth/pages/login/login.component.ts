@@ -16,7 +16,6 @@ import { Component, computed, effect } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 import Swal from 'sweetalert2';
-import { AuthStatus } from '../../interfaces';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
@@ -28,12 +27,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     RouterModule,
-    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
-  styles: ` `,
+  styles: `
+  span, button, mat-label, input, mat-card-title{
+    font-family: 'Montserrat';
+    font-size: 14px
+  }
+  `,
 })
 export class LoginComponent {
   constructor(
@@ -45,8 +49,8 @@ export class LoginComponent {
   public hide = true;
 
   public myForm: FormGroup = this.fb.group({
-    email: ['admin@store.com', [Validators.required, Validators.email]],
-    password: ['admin123', [Validators.required, Validators.minLength(6)]],
+    email: ['user@store.com', [Validators.required, Validators.email]],
+    password: ['user123', [Validators.required, Validators.minLength(6)]],
   });
 
   clickEvent(event: MouseEvent) {

@@ -1,0 +1,72 @@
+.bg {
+  background-color: rgba(255, 154, 61, 1);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.price {
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  padding-bottom: 0;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.title {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: bolder;
+  text-align: start;
+}
+
+.description {
+  margin-top: 0.5rem;
+  font-family: 'Montserrat';
+  font-size: 12px;
+}
+
+.right {
+  padding: 0.8rem;
+  background-color: white;
+  height: 1rem;
+  width: 0.2rem;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  font-size: 16px;
+}
+
+.left {
+  padding: 0.8rem;
+  background-color: white;
+  height: 1rem;
+  width: 8px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  font-size: 16px;
+}
+
+.total {
+  margin-top: 1rem;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.line {
+
+  background-color: green;
+  margin-top: 0.75rem;
+  color: white;
+  padding: 0.3rem;
+  border-radius: 10px;
+
+}
+
+button {
+  background-color: white;
+  border-color: black;
+}

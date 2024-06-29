@@ -1,11 +1,6 @@
-<div
-  class="star-rating flex flex-row justify-content-center align-items-center mt-3"
->
-  <mat-icon
-    class="flex align-items-center"
-    *ngFor="let star of starsArray"
-    [class.filled]="star <= rating"
-    >star
-  </mat-icon>
+<div class="flex flex-row justify-content-star align-items-start mt-0 w-9">
+  <mat-icon *ngFor="let star of fullStars">star</mat-icon>
+  <mat-icon *ngIf="halfStar">star_half</mat-icon>
+  <mat-icon *ngFor="let star of emptyStars">star_border</mat-icon>
   <span>{{ rating | number : "1.1-1" }}</span>
 </div>

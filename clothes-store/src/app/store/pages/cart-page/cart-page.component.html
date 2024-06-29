@@ -1,1 +1,84 @@
+<div class="flex flex-column md:flex-row justify-content-around m-4 ml-3">
+  <div class="col-12 md:col-8 cartItems">
+    <div *ngFor="let cartItem of cart()" class="md:col-12 py-0 px-0">
+      <mat-card
+        class="bg flex flex-wrap justify-content-around gap-5 my-3 w-full"
+      >
+        <mat-card-content class="flex flex-wrap">
+          <div class="flex col-6">
+            <picture class="col justify-content-center">
+              <img
+                [src]="cartItem.product.image"
+                alt=""
+                class="border-round-2xl"
+                width="150rem"
+              />
+            </picture>
 
+            <div
+              class="flex flex-column col justify-content-center xs:mx-6 md:mx-2"
+            >
+              <p class="title">{{ cartItem.product.name | uppercase }}</p>
+              <p class="price">USD {{ cartItem.product.price }}</p>
+              <store-rating
+                [rating]="5"
+                class="mt-1 justify-content-start"
+              ></store-rating>
+              <p class="description">{{ cartItem.product.description }}</p>
+              <p class="description">{{ cartItem.product.stock }} en stock</p>
+            </div>
+          </div>
+          <div class="flex flex-row col">
+            <div class="flex col justify-content-center align-items-center">
+              <button (click)="increaseBy(-1, cartItem.product._id)">-</button>
+              <span class="px-2"> {{ cartItem.quantity }} </span>
+              <button (click)="increaseBy(+1, cartItem.product._id)">+</button>
+            </div>
+            <div class="flex col justify-content-center align-items-center">
+              <p class="price">
+                USD
+                {{
+                  cartItem.quantity * cartItem.product.price | number : "1.2-2"
+                }}
+              </p>
+            </div>
+            <div class="flex col-1 justify-content-center align-items-center">
+              <mat-icon (click)="deleteProduct(cartItem.product._id)"
+                >delete</mat-icon
+              >
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="col px-0">
+    <mat-card class="mt-2 col bg p-4 w-full">
+      <div>
+        <p class="title">RESUMEN DEL PEDIDO</p>
+        <div class="flex flex-row flex-wrap justify-content-between">
+          <p class="description">Subtotal</p>
+          <p class="description">
+            USD {{ order().subtotal | number : "1.2-2" }}
+          </p>
+        </div>
+        <div class="flex flex-row flex-wrap justify-content-between">
+          <p class="description">Envío</p>
+          <p class="line">GRATIS</p>
+        </div>
+        <div class="flex flex-row flex-wrap justify-content-between">
+          <p class="description">IVA Inc.</p>
+          <p class="description">USD {{ order().iva | number : "1.2-2" }}</p>
+        </div>
+        <hr />
+        <div class="flex flex-row flex-wrap justify-content-between">
+          <p class="total">TOTAL ESTIMADO</p>
+          <p class="description mt-0">
+            USD {{ order().total | number : "1.2-2" }}
+          </p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
