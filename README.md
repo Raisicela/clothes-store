@@ -65,7 +65,8 @@ $ ng s
 
 ## Try it!
 
-FronEnd is available at: https://668351ce7f25b4bbfd048338--nimble-syrniki-5bb972.netlify.app/#/store/home
+FronEnd is available at:
+https://668358de45573bdaf90fca45--nimble-syrniki-5bb972.netlify.app/#/store/home
 
 Create a user account or
 
