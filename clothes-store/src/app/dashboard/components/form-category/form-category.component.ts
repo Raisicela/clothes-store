@@ -52,10 +52,6 @@ export class FormCategoryComponent {
     private _route: ActivatedRoute,
     private _dashboardService: DashboardService
   ) {
-    // this._route.paramMap.subscribe((paramMap) => {
-    //   console.log(paramMap.get('id'));
-    // });
-
     this._route.paramMap
       .pipe(
         switchMap((paramMap) =>
@@ -63,7 +59,6 @@ export class FormCategoryComponent {
         )
       )
       .subscribe((category) => {
-        console.log(category);
         if (category._id) {
           this.isNew = false;
         }
@@ -115,7 +110,6 @@ export class FormCategoryComponent {
       this.myForm.markAsTouched();
       return;
     }
-    console.log('Guardar', this.myForm.value);
     if (this.isNew) {
       this._dashboardService.addCategory(this.myForm.value, this.file);
       Swal.fire({

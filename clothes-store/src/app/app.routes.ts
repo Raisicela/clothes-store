@@ -120,6 +120,13 @@ export const routes: Routes = [
           ).then((m) => m.FormProductComponent),
       },
       {
+        path: 'orders',
+        loadComponent: () =>
+          import('./dashboard/pages/orders/orders.component').then(
+            (m) => m.OrdersComponent
+          ),
+      },
+      {
         path: '**',
         redirectTo: 'categories',
       },

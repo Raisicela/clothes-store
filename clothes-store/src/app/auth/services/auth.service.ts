@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environment/ennvironment';
 import { Injectable, computed, signal } from '@angular/core';
 import { AuthStatus, CheckTokenResponse, User } from '../interfaces';
 import { LoginResponse } from '../interfaces/login-response';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { RegisterResponse } from '../interfaces/register-response';
 import { AuthRoles } from '../interfaces/auth-roles.enum';
+import { environment } from '../../../environment/ennvironment';
 
 @Injectable({
   providedIn: 'root',
@@ -64,8 +64,6 @@ export class AuthService {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      console.log('jahsdkjfklsjfkd');
-      // this._authStatus.set(AuthStatus.notAuthenticated);
       this.logOut();
       return of(false);
     }

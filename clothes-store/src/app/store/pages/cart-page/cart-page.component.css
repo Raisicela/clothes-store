@@ -3,10 +3,16 @@
 }
 
 .cartItems{
-  height: 80vh;
+  height: 90vh;
   overflow-y: scroll;
-  margin-right: 1rem;
-  padding-right: o;
+  margin-top: 5px;
+
+}
+
+@media screen and (max-width: 600px) {
+  .cartItems {
+    height: 50vh;
+  }
 }
 
 p{
@@ -25,7 +31,7 @@ p{
 
 .title {
   font-family: 'Montserrat';
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bolder;
   text-align: start;
 }
@@ -33,7 +39,7 @@ p{
 .description {
   margin-top: 0.5rem;
   font-family: 'Montserrat';
-  font-size: 12px;
+  font-size: 14px;
 }
 
 button{

@@ -5,6 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { RatingComponent } from '../../components/rating/rating.component';
 import { MatIconModule } from '@angular/material/icon';
 import { StoreService } from '../../services/store.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-cart-page',
@@ -15,6 +17,8 @@ import { StoreService } from '../../services/store.service';
     MatButtonModule,
     RatingComponent,
     MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.css',
@@ -23,9 +27,6 @@ import { StoreService } from '../../services/store.service';
 export class CartPageComponent {
   public order = this.storeService.order;
   public cart = this.storeService.cart;
-
-  // @Input()
-  // public cloth!: Product;
 
   constructor(private storeService: StoreService) {}
 

@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit, computed, signal } from '@angular/core';
-import { environment } from '../../../environment/ennvironment';
 import { Observable, catchError, map, of, switchMap } from 'rxjs';
 import { Category } from '../../store/interfaces/category.interface';
 import { Product } from '../../store/interfaces/product.interface';
+import { environment } from '../../../environment/ennvironment';
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +55,6 @@ export class DashboardService {
     const url: string = `${this.baseUrl}/products/${product._id}`;
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // .set('Content-Type', ' multipart/form-data');
 
     const formData = new FormData();
     formData.append('name', product.name);
@@ -67,9 +66,6 @@ export class DashboardService {
 
     if (file) {
       formData.append('avatar', file, file.name);
-      console.log(file, 'add file');
-      // const upload$ = this.http.post('/api/thumbnail-upload', formData);
-      // upload$.subscribe();
     }
 
     this.http
@@ -82,7 +78,6 @@ export class DashboardService {
     const url: string = `${this.baseUrl}/products`;
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // .set('Content-Type', ' multipart/form-data');
 
     const formData = new FormData();
     formData.append('name', product.name);
@@ -95,9 +90,6 @@ export class DashboardService {
 
     if (file) {
       formData.append('avatar', file, file.name);
-      console.log(file, 'add file');
-      // const upload$ = this.http.post('/api/thumbnail-upload', formData);
-      // upload$.subscribe();
     }
 
     this.http
@@ -139,7 +131,6 @@ export class DashboardService {
     const url: string = `${this.baseUrl}/category/${category._id}`;
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // .set('Content-Type', ' multipart/form-data');
 
     const formData = new FormData();
     formData.append('name', category.name);
@@ -147,9 +138,6 @@ export class DashboardService {
 
     if (file) {
       formData.append('imageFile', file, file.name);
-      console.log(file, 'add file');
-      // const upload$ = this.http.post('/api/thumbnail-upload', formData);
-      // upload$.subscribe();
     }
 
     this.http
@@ -162,7 +150,6 @@ export class DashboardService {
     const url: string = `${this.baseUrl}/category`;
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // .set('Content-Type', ' multipart/form-data');
 
     const formData = new FormData();
     formData.append('name', category.name);
@@ -170,9 +157,6 @@ export class DashboardService {
 
     if (file) {
       formData.append('imageFile', file, file.name);
-      console.log(file, 'add file');
-      // const upload$ = this.http.post('/api/thumbnail-upload', formData);
-      // upload$.subscribe();
     }
 
     this.http

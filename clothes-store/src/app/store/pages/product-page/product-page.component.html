@@ -4,8 +4,8 @@
     <mat-list class="flex flex-column w-full pt-0 mt-0">
       <button
         class="button-item"
+        [ngClass]="!id ? 'button-item-selected' : ''"
         routerLink="/store/products"
-        routerLinkActive="button-all-selected"
       >
         All
       </button>
@@ -58,24 +58,30 @@
   </div>
   <div class="mt-2 w-full">
     <store-search-box
+      [initialValue]="searchQuery()"
       (queryChild)="updateSearchQuery($event)"
     ></store-search-box>
     <div
       class="flex flex-wrap justify-content-start mx-4 productItems"
       #scrollableDiv
     >
+      @for (product of products(); track $index) {
       <product-card
         class="col-12 md:col-4 lg:col-3 xl:col-2 p-0 flex justify-content-center"
         (addToCart)="addToCart($event)"
-        *ngFor="let product of products()"
         [cloth]="product"
       ></product-card>
+      } @empty { @if ( searchQuery() !== '' ) {
+      <h4>No products found for search: "{{ searchQuery() }}" .</h4>
+      } }
     </div>
     <div class="flex justify-content-center">
+      @if(!id){
       <button class="button-more" (click)="getProducts()">
         More products...
         <mat-icon> arrow_downward</mat-icon>
       </button>
+      }
     </div>
   </div>
 </div>

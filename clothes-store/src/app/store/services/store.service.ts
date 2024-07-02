@@ -1,15 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit, computed, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { Product } from '../interfaces/product.interface';
-import { environment } from '../../../environment/ennvironment';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Category } from '../interfaces/category.interface';
-import { AuthStatus, CheckTokenResponse, User } from '../../auth/interfaces';
-import { AuthService } from '../../auth/services/auth.service';
-import { AuthRoles } from '../../auth/interfaces/auth-roles.enum';
-import { appConfig } from '../../app.config';
-import { L } from '@angular/cdk/keycodes';
-import { FiltersComponent } from '../components/filters/filters.component';
+import { environment } from '../../../environment/ennvironment';
 
 interface Order {
   subtotal: number;
@@ -47,7 +41,10 @@ export class StoreService {
   });
 
   public countItems = computed<number>(() => {
-    const count = this.cart().reduce((count, cart) => count + cart.quantity, 0);
+    const count = this.cart().reduce(
+      (count, cart) => (count += cart.quantity),
+      0
+    );
     return count;
   });
 
@@ -132,6 +129,9 @@ export class StoreService {
       );
 
       prev[cartItemIndex].quantity += value;
+      if (prev[cartItemIndex].quantity === 0) {
+        prev[cartItemIndex].quantity = 1;
+      }
       return [...prev];
     });
     this.saveCart(this.cart());

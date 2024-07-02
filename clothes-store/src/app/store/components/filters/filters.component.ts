@@ -68,7 +68,6 @@ export class FiltersComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log({ id: this.id });
     const id = changes['id'];
     if (id) {
       this.getProducts();

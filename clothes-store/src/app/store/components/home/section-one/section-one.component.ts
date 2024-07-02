@@ -23,11 +23,8 @@ export class SectionOneComponent {
   constructor(private _router: Router) {}
 
   public mensaje: string = 'Discover the product for you!';
-  // @Output()
-  // public searchQueryHome = new EventEmitter()
 
   search(query: string) {
-    console.log(query);
     this._router.navigateByUrl(`/store/products?query=${query}`);
   }
 }

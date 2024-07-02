@@ -3,6 +3,6 @@ export interface Category {
   name: string;
   description: string;
   image: string;
-  createdAt: Date;
+  createdAt: string;
   __v: number;
 }

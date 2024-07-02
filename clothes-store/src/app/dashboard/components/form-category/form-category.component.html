@@ -1,10 +1,10 @@
 <div class="flex flex-row justify-content-center w-full">
   <mat-card
-    class="flex align-items-center w-12 md:w-10 bg-white border-round-lg mt-4 mx-4 pt-6 pb-4 shadow-8"
+    class="flex align-items-center w-12 md:w-7 bg-white border-round-lg mt-4 mx-4 pt-6 pb-4 shadow-8"
   >
+    <!-- (ngSubmit)="onSave()" -->
     <form
       [formGroup]="myForm"
-      (ngSubmit)="onSave()"
       class="flex flex-column justify-content-center align-items-center w-11"
     >
       <mat-card-header class="mb-4">
@@ -42,12 +42,23 @@
         >Image:*</mat-label
       >
       <picture>
+        @if(imageUrl){
         <img
           [src]="imageUrl"
-          width="220px"
+          width="200px"
           height="150px"
           class="border-round-lg mt-4"
         />
+
+        }@else {
+        <img
+          [src]="'https://adjditec.com/web/uploads/productos/6182.jpg'"
+          width="200px"
+          height="150px"
+          class="border-round-lg mt-4"
+        />
+
+        }
       </picture>
       <input
         type="file"
@@ -60,7 +71,7 @@
       <div
         class="file-upload flex flex-column md:flex-row text-sm justify-content-start align-items-center font w-12 mb-4"
       >
-        {{ myForm.value.image?.name || "No file uploaded yet." }}
+        {{ myForm.value.imageFile || "No file uploaded yet." }}
 
         <button
           mat-button
@@ -68,7 +79,8 @@
           class="button-item font flex justify-content-center align-items-center"
           (click)="fileUpload.click()"
         >
-          <mat-icon>attach_file</mat-icon> Choose an image
+          <mat-icon>attach_file</mat-icon>
+          @if(isNew){ Choose an image }@else { Change image }
         </button>
       </div>
 
@@ -88,6 +100,7 @@
           style="background-color: rgba(255, 107, 1, 1)"
           class="font"
           [disabled]="myForm.invalid"
+          (click)="onSave()"
         >
           Save
         </button>

@@ -48,9 +48,6 @@ export class FormProductComponent {
     private _route: ActivatedRoute,
     private _location: Location
   ) {
-    // this._route.paramMap.subscribe((paramMap) => {
-    //   console.log(paramMap.get('id'));
-    // });
     this._route.paramMap
       .pipe(
         switchMap((paramMap) =>
@@ -58,7 +55,6 @@ export class FormProductComponent {
         )
       )
       .subscribe((product) => {
-        console.log(product);
         if (product._id) {
           this.isNew = false;
         }
@@ -126,7 +122,6 @@ export class FormProductComponent {
       this.myForm.markAsTouched();
       return;
     }
-    console.log('Guardar', this.myForm.value);
     if (this.isNew) {
       this._dashboardService.addProduct(this.myForm.value, this.file);
       Swal.fire({

@@ -21,6 +21,7 @@ import { Product } from '../../interfaces/product.interface';
 import { Category } from '../../interfaces/category.interface';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-page',
@@ -61,6 +62,7 @@ export class ProductPageComponent implements OnInit, OnChanges {
 
   uniqueRates: number[] = [];
   private _products = signal<Product[]>([]);
+  private _allProducts = signal<Product[]>([]);
   private _categories = signal<Category[]>([]);
 
   public searchQuery = signal<string>('');
@@ -72,7 +74,7 @@ export class ProductPageComponent implements OnInit, OnChanges {
     let filteredProducts: Product[] = this._products();
 
     if (query) {
-      filteredProducts = this._products().filter((p) =>
+      filteredProducts = this._allProducts().filter((p) =>
         p.name.toLowerCase().trim().includes(query)
       );
     }
@@ -118,8 +120,8 @@ export class ProductPageComponent implements OnInit, OnChanges {
     this.uniqueRates = [
       ...new Set(this.products().map((product) => product.rate)),
     ];
-    // this.getProducts();
     this.getCategories();
+    this.getAllProducts();
     this._route.queryParams.subscribe((query) => {
       if (query['query']) {
         this.updateSearchQuery(query['query']);
@@ -128,7 +130,6 @@ export class ProductPageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log({ id: this.id });
     const id = changes['id'];
     if (id) {
       this.getProducts();
@@ -137,6 +138,13 @@ export class ProductPageComponent implements OnInit, OnChanges {
 
   addToCart(product: Product) {
     this.storeService.addToCart(product);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Product added to cart',
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
   updateSearchPrice(price: string) {
@@ -149,20 +157,18 @@ export class ProductPageComponent implements OnInit, OnChanges {
 
   updateSearchQuery(query: string) {
     this.searchQuery.set(query);
-    this.getAllProducts();
   }
 
   private _page: number = 0;
-  private _limit: number = 10;
+  private _limit: number = 8;
   getProducts() {
-    if (!this.id) {
+    if (!this.id || this.id === 'all') {
       this.storeService
         .getMoreProducts(this._page, this._limit)
         .subscribe((products) => {
           this._products.update((prev) => [...prev, ...products]);
         });
       this._page++;
-      console.log(this.tagInput);
       if (this.tagInput) {
         this.tagInput.nativeElement.scrollBy(0, 700);
       }
@@ -175,7 +181,7 @@ export class ProductPageComponent implements OnInit, OnChanges {
 
   getAllProducts() {
     this.storeService.getAllProducts().subscribe((products) => {
-      this._products.set(products);
+      this._allProducts.set(products);
     });
   }
 

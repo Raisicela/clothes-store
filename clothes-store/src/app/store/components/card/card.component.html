@@ -1,4 +1,4 @@
-<mat-card class="border-round-2xl my-4 w-11 pb-2 h-27rem">
+<mat-card class="border-round-2xl my-4 w-11 pb-2 h-30rem">
   <product-lazy-image
     [url]="cloth.image"
     [alt]="cloth.description"
@@ -13,6 +13,9 @@
         class="align-items-center"
       ></store-rating>
       <p class="description">{{ cloth.description }}</p>
+      <p class="description font-bold">
+        Added {{ cloth.createdAt | timeAgo }} ago
+      </p>
     </mat-card-content>
     <mat-card-actions class="justify-content-center">
       <button

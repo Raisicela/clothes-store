@@ -9,7 +9,9 @@
 
 <div class="container column-gap-3 row-gap-4 mt-6 mx-3">
   <product-card
-    *ngFor="let product of products"
+    class="col-12 md:col-4 lg:col-3 xl:col-2 p-0 flex justify-content-center"
+    (addToCart)="addToCart($event)"
+    *ngFor="let product of products()"
     [cloth]="product"
   ></product-card>
 </div>

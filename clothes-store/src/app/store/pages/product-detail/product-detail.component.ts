@@ -33,7 +33,6 @@ export class ProductDetailComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
   ngOnInit() {
-    console.log(this.product()?.rate);
     if (this.id) {
       this.storeService.getProductById(this.id).subscribe({
         next: (product) => {
@@ -44,7 +43,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCartHandler() {
-    console.log(this.product());
     this.storeService.addToCart(this.product()!);
   }
 }

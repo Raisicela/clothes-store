@@ -17,7 +17,6 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   public finishedAuthCheck = computed<boolean>(() => {
-    console.log(this.authService.authStatus());
     if (this.authService.authStatus() === AuthStatus.checking) {
       return false;
     }

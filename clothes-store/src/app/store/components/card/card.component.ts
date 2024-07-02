@@ -8,6 +8,7 @@ import { ProductPageComponent } from '../../pages/product-page/product-page.comp
 import { RatingComponent } from '../rating/rating.component';
 import { LazyImageComponent } from '../lazyImage/lazyImage.component';
 import { RouterModule } from '@angular/router';
+import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 
 @Component({
   selector: 'product-card',
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     RatingComponent,
     LazyImageComponent,
     RouterModule,
+    TimeAgoPipe,
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
